@@ -15,7 +15,7 @@ export const FooterTab: React.FC<FooterTabProps> = ({
   selectedTab,
   setSelectedTab,
 }) => {
-  const IconComponent = name === 'wallet' ? FontAwesome5 : FontAwesome;
+  const IconComponent = name === 'wallet' || name === 'social' ? FontAwesome5 : FontAwesome;
 
   return (
     <TouchableOpacity onPress={() => setSelectedTab(tabName)}>

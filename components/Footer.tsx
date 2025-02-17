@@ -18,8 +18,14 @@ export const Footer: React.FC<FooterProps> = ({ selectedTab, setSelectedTab }) =
         setSelectedTab={setSelectedTab}
       />
       <FooterTab
-        name="retweet"
-        tabName="feed"
+        name="trophy"
+        tabName="tournament"
+        selectedTab={selectedTab}
+        setSelectedTab={setSelectedTab}
+      />
+      <FooterTab
+        name="users"
+        tabName="social"
         selectedTab={selectedTab}
         setSelectedTab={setSelectedTab}
       />
