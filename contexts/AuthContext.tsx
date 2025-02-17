@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { createContext, useState, useEffect } from 'react';
+import { Animated } from 'react-native';
 
 import { getUser, logout } from '../services/authService';
 
@@ -21,12 +22,22 @@ export const AuthProvider = ({ children }) => {
     loadUser();
   }, []);
 
+  const fadeAnim = new Animated.Value(1); // Initial opacity
+
   const handleLogout = async () => {
-    await logout();
-    setUser(null);
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Login' }], // Redirect to Login
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 300, // Smooth fade-out
+      useNativeDriver: true,
+    }).start(async () => {
+      await logout(); // Perform actual logout
+      setUser(null); // Clear user state
+
+      // Reset navigation stack to only have LoginScreen with no animation
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Login', params: { animation: 'none' } }],
+      });
     });
   };
 
