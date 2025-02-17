@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { View } from 'react-native';
 
-import { FeedTab } from '../components/FeedTab';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
+import { SocialTab } from '../components/SocialTab';
+import { TournamentTab } from '../components/TournamentTab';
 import { WagerTab } from '../components/WagerTab';
 import { WalletTab } from '../components/WalletTab';
 import { AuthContext } from '../contexts/AuthContext';
@@ -16,8 +17,10 @@ export const HomeScreen: React.FC = () => {
     switch (selectedTab) {
       case 'wager':
         return <WagerTab />;
-      case 'feed':
-        return <FeedTab />;
+      case 'social':
+        return <SocialTab />;
+      case 'tournament':
+        return <TournamentTab />;
       case 'wallet':
         return <WalletTab />;
       default:

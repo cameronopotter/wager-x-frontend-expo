@@ -6,18 +6,20 @@ import { register } from '../services/authService';
 
 export const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const { setUser } = useContext(AuthContext);
 
   const handleRegister = async () => {
     try {
-      const user = await register(name, email, password, passwordConfirm);
+      const user = await register(name, username, email, dateOfBirth, password, passwordConfirm);
       setUser(user);
       navigation.reset({ index: 0, routes: [{ name: 'Home' }] });
     } catch (error) {
-      alert(error);
+      alert(error.message || 'Registration failed');
     }
   };
 
@@ -37,9 +39,21 @@ export const RegisterScreen = ({ navigation }) => {
         className="mb-4 w-full rounded-lg bg-gray-800 p-4 text-white"
       />
       <TextInput
+        placeholder="Username"
+        placeholderTextColor="gray"
+        onChangeText={setUsername}
+        className="mb-4 w-full rounded-lg bg-gray-800 p-4 text-white"
+      />
+      <TextInput
         placeholder="Email"
         placeholderTextColor="gray"
         onChangeText={setEmail}
+        className="mb-4 w-full rounded-lg bg-gray-800 p-4 text-white"
+      />
+      <TextInput
+        placeholder="Date of Birth (YYYY-MM-DD)"
+        placeholderTextColor="gray"
+        onChangeText={setDateOfBirth}
         className="mb-4 w-full rounded-lg bg-gray-800 p-4 text-white"
       />
       <TextInput
