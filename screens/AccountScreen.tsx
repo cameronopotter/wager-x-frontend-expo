@@ -13,7 +13,7 @@ export const AccountScreen = () => {
     <View className="flex-1 bg-gray-900">
       {/* Header Section */}
       <View className="h-40 w-full  bg-gray-800 p-4">
-        <View className="mt-16 flex-row justify-between">
+        <View className="mt-24 flex-row justify-between">
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <FontAwesome name="arrow-left" size={24} color="white" />
           </TouchableOpacity>
