@@ -1,8 +1,8 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import axios from 'axios'
 
 // const API_URL = 'https://wager-x-backend-f8077d406fce.herokuapp.com/api';
-const API_URL = 'http://wager-x-backend.test/api';
+const API_URL = 'http://wager-x-backend.test/api'
 
 /**
  * Register a new user
@@ -32,16 +32,16 @@ export const register = async (
           Accept: 'application/json',
         },
       }
-    );
+    )
 
     // Store token
-    await AsyncStorage.setItem('token', response.data.token);
-    return response.data.user;
+    await AsyncStorage.setItem('token', response.data.token)
+    return response.data.user
   } catch (error: any) {
-    console.error('Registration Error:', error.response?.data || error.message);
-    throw error.response?.data || { message: 'Registration failed' };
+    console.error('Registration Error:', error.response?.data || error.message)
+    throw error.response?.data || { message: 'Registration failed' }
   }
-};
+}
 
 /**
  * Login a user
@@ -57,24 +57,24 @@ export const login = async (identifier: string, password: string) => {
           Accept: 'application/json',
         },
       }
-    );
+    )
 
     // Store token
-    await AsyncStorage.setItem('token', response.data.token);
-    return response.data.user;
+    await AsyncStorage.setItem('token', response.data.token)
+    return response.data.user
   } catch (error: any) {
-    console.error('Login Error:', error.response?.data || error.message);
-    throw error.response?.data || { message: 'Login failed' };
+    console.error('Login Error:', error.response?.data || error.message)
+    throw error.response?.data || { message: 'Login failed' }
   }
-};
+}
 
 /**
  * Logout a user
  */
 export const logout = async () => {
   try {
-    const token = await AsyncStorage.getItem('token');
-    if (!token) throw { message: 'No authentication token found' };
+    const token = await AsyncStorage.getItem('token')
+    if (!token) throw { message: 'No authentication token found' }
 
     await axios.post(
       `${API_URL}/logout`,
@@ -85,33 +85,33 @@ export const logout = async () => {
           'Content-Type': 'application/json',
         },
       }
-    );
+    )
 
-    await AsyncStorage.removeItem('token');
+    await AsyncStorage.removeItem('token')
   } catch (error: any) {
-    console.error('Logout Error:', error.response?.data || error.message);
-    throw error.response?.data || { message: 'Logout failed' };
+    console.error('Logout Error:', error.response?.data || error.message)
+    throw error.response?.data || { message: 'Logout failed' }
   }
-};
+}
 
 /**
  * Get authenticated user data
  */
 export const getUser = async () => {
   try {
-    const token = await AsyncStorage.getItem('token');
-    if (!token) throw { message: 'No authentication token found' };
+    const token = await AsyncStorage.getItem('token')
+    if (!token) throw { message: 'No authentication token found' }
 
     const response = await axios.get(`${API_URL}/user`, {
       headers: {
         Authorization: `Bearer ${token}`,
         Accept: 'application/json',
       },
-    });
+    })
 
-    return response.data;
+    return response.data
   } catch (error: any) {
-    console.error('User Fetch Error:', error.response?.data || error.message);
-    throw error.response?.data || { message: 'Failed to fetch user' };
+    console.error('User Fetch Error:', error.response?.data || error.message)
+    throw error.response?.data || { message: 'Failed to fetch user' }
   }
-};
+}

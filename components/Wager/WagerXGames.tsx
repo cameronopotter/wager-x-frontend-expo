@@ -1,15 +1,20 @@
-import { FontAwesome5 } from '@expo/vector-icons';
-import React from 'react';
-import { View, Text, TouchableOpacity, Modal, Pressable } from 'react-native';
+import { FontAwesome5 } from '@expo/vector-icons'
+import React from 'react'
+import { View, Text, TouchableOpacity, Modal, Pressable } from 'react-native'
 
 interface Props {
-  isVisible: boolean;
-  onClose: () => void;
+  isVisible: boolean
+  onClose: () => void
 }
 
 export const WagerXGames: React.FC<Props> = ({ isVisible, onClose }) => {
   return (
-    <Modal visible={isVisible} transparent animationType="slide" onRequestClose={onClose}>
+    <Modal
+      visible={isVisible}
+      transparent
+      animationType="slide"
+      onRequestClose={onClose}
+    >
       {/* Background Overlay */}
       <Pressable className="flex-1 bg-black/50" onPress={onClose}>
         <View className="absolute bottom-0 h-[80%] w-full rounded-t-2xl bg-gray-900 p-6">
@@ -25,5 +30,5 @@ export const WagerXGames: React.FC<Props> = ({ isVisible, onClose }) => {
         </View>
       </Pressable>
     </Modal>
-  );
-};
+  )
+}

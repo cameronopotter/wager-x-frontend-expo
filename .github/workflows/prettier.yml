@@ -27,7 +27,7 @@ jobs:
       - name: Run Prettier Check
         uses: rutajdash/prettier-cli-action@v1.0.2
         with:
-          prettier-options: "--check ."
+          prettier-options: '--check .'
 
       - name: Fail if formatting issues are found
         run: exit 1

@@ -1,14 +1,17 @@
-import React from 'react';
-import { View } from 'react-native';
+import React from 'react'
+import { View } from 'react-native'
 
-import { FooterTab } from './FooterTab';
+import { FooterTab } from './FooterTab'
 
 interface FooterProps {
-  selectedTab: string;
-  setSelectedTab: (tab: string) => void;
+  selectedTab: string
+  setSelectedTab: (tab: string) => void
 }
 
-export const Footer: React.FC<FooterProps> = ({ selectedTab, setSelectedTab }) => {
+export const Footer: React.FC<FooterProps> = ({
+  selectedTab,
+  setSelectedTab,
+}) => {
   return (
     <View className="h-28 flex-row items-center justify-around bg-gray-800 p-4">
       <FooterTab
@@ -36,5 +39,5 @@ export const Footer: React.FC<FooterProps> = ({ selectedTab, setSelectedTab }) =
         setSelectedTab={setSelectedTab}
       />
     </View>
-  );
-};
+  )
+}

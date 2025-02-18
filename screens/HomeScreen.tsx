@@ -1,34 +1,34 @@
-import React, { useContext, useState } from 'react';
-import { View, Text } from 'react-native';
+import React, { useContext, useState } from 'react'
+import { View, Text } from 'react-native'
 
-import { Footer } from '../components/Footer';
-import { Header } from '../components/Header';
-import { SocialTab } from '../components/SocialTab';
-import { TournamentTab } from '../components/TournamentTab';
-import { WagerModal } from '../components/Wager/WagerModal'; // Ensure it's imported
-import { WagerTab } from '../components/WagerTab';
-import { WalletTab } from '../components/WalletTab';
-import { AuthContext } from '../contexts/AuthContext';
+import { Footer } from '../components/Footer'
+import { Header } from '../components/Header'
+import { SocialTab } from '../components/SocialTab'
+import { TournamentTab } from '../components/TournamentTab'
+import { WagerModal } from '../components/Wager/WagerModal' // Ensure it's imported
+import { WagerTab } from '../components/WagerTab'
+import { WalletTab } from '../components/WalletTab'
+import { AuthContext } from '../contexts/AuthContext'
 
 export const HomeScreen: React.FC = () => {
-  const { user } = useContext(AuthContext);
-  const [selectedTab, setSelectedTab] = useState<string>('wager');
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const { user } = useContext(AuthContext)
+  const [selectedTab, setSelectedTab] = useState<string>('wager')
+  const [activeCategory, setActiveCategory] = useState<string | null>(null)
 
   const renderContent = () => {
     switch (selectedTab) {
       case 'wager':
-        return <WagerTab setActiveCategory={setActiveCategory} />;
+        return <WagerTab setActiveCategory={setActiveCategory} />
       case 'social':
-        return <SocialTab />;
+        return <SocialTab />
       case 'tournament':
-        return <TournamentTab />;
+        return <TournamentTab />
       case 'wallet':
-        return <WalletTab />;
+        return <WalletTab />
       default:
-        return null;
+        return null
     }
-  };
+  }
 
   return (
     <View className="relative flex-1 bg-gray-900">
@@ -52,5 +52,5 @@ export const HomeScreen: React.FC = () => {
         </WagerModal>
       )}
     </View>
-  );
-};
+  )
+}
