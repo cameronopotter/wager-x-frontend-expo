@@ -1,16 +1,16 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import React from 'react';
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import React from 'react'
 
-import { AuthProvider } from './contexts/AuthContext';
-import { AccountScreen } from './screens/AccountScreen';
-import { HomeScreen } from './screens/HomeScreen';
-import { LoginScreen } from './screens/LoginScreen';
-import { RegisterScreen } from './screens/RegisterScreen';
+import { AuthProvider } from './contexts/AuthContext'
+import { AccountScreen } from './screens/AccountScreen'
+import { HomeScreen } from './screens/HomeScreen'
+import { LoginScreen } from './screens/LoginScreen'
+import { RegisterScreen } from './screens/RegisterScreen'
 
-import './global.css';
+import './global.css'
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 
 export default function App() {
   return (
@@ -24,5 +24,5 @@ export default function App() {
         </Stack.Navigator>
       </AuthProvider>
     </NavigationContainer>
-  );
+  )
 }

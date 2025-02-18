@@ -1,23 +1,30 @@
-import React, { useState, useContext } from 'react';
-import { View, TextInput, Button, Text, Image, TouchableOpacity } from 'react-native';
+import React, { useState, useContext } from 'react'
+import {
+  View,
+  TextInput,
+  Button,
+  Text,
+  Image,
+  TouchableOpacity,
+} from 'react-native'
 
-import { AuthContext } from '../contexts/AuthContext';
-import { login } from '../services/authService';
+import { AuthContext } from '../contexts/AuthContext'
+import { login } from '../services/authService'
 
 export const LoginScreen = ({ navigation }) => {
-  const [identifier, setIdentifier] = useState(''); // Can be email or username
-  const [password, setPassword] = useState('');
-  const { setUser } = useContext(AuthContext);
+  const [identifier, setIdentifier] = useState('') // Can be email or username
+  const [password, setPassword] = useState('')
+  const { setUser } = useContext(AuthContext)
 
   const handleLogin = async () => {
     try {
-      const user = await login(identifier, password);
-      setUser(user);
-      navigation.reset({ index: 0, routes: [{ name: 'Home' }] });
+      const user = await login(identifier, password)
+      setUser(user)
+      navigation.reset({ index: 0, routes: [{ name: 'Home' }] })
     } catch (error) {
-      alert(error.message || 'Login failed');
+      alert(error.message || 'Login failed')
     }
-  };
+  }
 
   return (
     <View className="flex-1 items-center justify-center bg-gray-900 px-6">
@@ -42,7 +49,10 @@ export const LoginScreen = ({ navigation }) => {
         className="mb-6 w-full rounded-lg bg-gray-800 p-4 text-white"
       />
 
-      <TouchableOpacity onPress={handleLogin} className="mb-4 w-full rounded-lg bg-blue-600 p-4">
+      <TouchableOpacity
+        onPress={handleLogin}
+        className="mb-4 w-full rounded-lg bg-blue-600 p-4"
+      >
         <Text className="text-center font-bold text-white">Login</Text>
       </TouchableOpacity>
 
@@ -50,5 +60,5 @@ export const LoginScreen = ({ navigation }) => {
         <Text className="text-blue-400">Don't have an account? Register</Text>
       </TouchableOpacity>
     </View>
-  );
-};
+  )
+}

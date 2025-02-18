@@ -1,27 +1,41 @@
-import React, { useState, useContext } from 'react';
-import { View, TextInput, Button, Text, Image, TouchableOpacity } from 'react-native';
+import React, { useState, useContext } from 'react'
+import {
+  View,
+  TextInput,
+  Button,
+  Text,
+  Image,
+  TouchableOpacity,
+} from 'react-native'
 
-import { AuthContext } from '../contexts/AuthContext';
-import { register } from '../services/authService';
+import { AuthContext } from '../contexts/AuthContext'
+import { register } from '../services/authService'
 
 export const RegisterScreen = ({ navigation }) => {
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
-  const { setUser } = useContext(AuthContext);
+  const [name, setName] = useState('')
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [dateOfBirth, setDateOfBirth] = useState('')
+  const [password, setPassword] = useState('')
+  const [passwordConfirm, setPasswordConfirm] = useState('')
+  const { setUser } = useContext(AuthContext)
 
   const handleRegister = async () => {
     try {
-      const user = await register(name, username, email, dateOfBirth, password, passwordConfirm);
-      setUser(user);
-      navigation.reset({ index: 0, routes: [{ name: 'Home' }] });
+      const user = await register(
+        name,
+        username,
+        email,
+        dateOfBirth,
+        password,
+        passwordConfirm
+      )
+      setUser(user)
+      navigation.reset({ index: 0, routes: [{ name: 'Home' }] })
     } catch (error) {
-      alert(error.message || 'Registration failed');
+      alert(error.message || 'Registration failed')
     }
-  };
+  }
 
   return (
     <View className="flex-1 items-center justify-center bg-gray-900 px-6">
@@ -73,7 +87,8 @@ export const RegisterScreen = ({ navigation }) => {
 
       <TouchableOpacity
         onPress={handleRegister}
-        className="mb-4 w-full rounded-lg bg-green-600 p-4">
+        className="mb-4 w-full rounded-lg bg-green-600 p-4"
+      >
         <Text className="text-center font-bold text-white">Register</Text>
       </TouchableOpacity>
 
@@ -81,5 +96,5 @@ export const RegisterScreen = ({ navigation }) => {
         <Text className="text-blue-400">Already have an account? Login</Text>
       </TouchableOpacity>
     </View>
-  );
-};
+  )
+}

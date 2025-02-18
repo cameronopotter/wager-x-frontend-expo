@@ -1,9 +1,9 @@
-import { FontAwesome5 } from '@expo/vector-icons';
-import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { FontAwesome5 } from '@expo/vector-icons'
+import React from 'react'
+import { View, Text, TouchableOpacity } from 'react-native'
 
 interface Props {
-  goBack: () => void;
+  goBack: () => void
 }
 
 export const VideoGames: React.FC<Props> = ({ goBack }) => {
@@ -11,5 +11,5 @@ export const VideoGames: React.FC<Props> = ({ goBack }) => {
     <View className="flex-1 items-center justify-center bg-gray-900">
       <Text className="text-2xl font-bold text-white">Video Games</Text>
     </View>
-  );
-};
+  )
+}

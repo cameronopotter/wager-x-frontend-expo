@@ -1,13 +1,13 @@
-import { FontAwesome } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
-import React, { useContext } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
+import React, { useContext } from 'react'
+import { View, Text, TouchableOpacity } from 'react-native'
 
-import { AuthContext } from '../contexts/AuthContext';
+import { AuthContext } from '../contexts/AuthContext'
 
 export const AccountScreen = () => {
-  const { user, handleLogout } = useContext(AuthContext);
-  const navigation = useNavigation();
+  const { user, handleLogout } = useContext(AuthContext)
+  const navigation = useNavigation()
 
   return (
     <View className="flex-1 bg-gray-900">
@@ -26,10 +26,13 @@ export const AccountScreen = () => {
       <View className="flex-1 items-center justify-center">
         <Text className="mb-2 text-2xl font-bold text-white">{user?.name}</Text>
 
-        <TouchableOpacity onPress={handleLogout} className="mt-6 w-full rounded-lg bg-red-600 p-4">
+        <TouchableOpacity
+          onPress={handleLogout}
+          className="mt-6 w-full rounded-lg bg-red-600 p-4"
+        >
           <Text className="text-center font-bold text-white">Logout</Text>
         </TouchableOpacity>
       </View>
     </View>
-  );
-};
+  )
+}
