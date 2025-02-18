@@ -2,24 +2,23 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import React, { useState, useContext } from 'react';
 import { View, Text, TouchableOpacity, Switch, Animated } from 'react-native';
 
-import { CustomWager } from './Wager/CustomWager';
-import { Sports } from './Wager/Sports';
-import { VideoGames } from './Wager/VideoGames';
-import { WagerXGames } from './Wager/WagerXGames';
 import { AuthContext } from '../contexts/AuthContext';
 
-export const WagerTab: React.FC = () => {
+interface Props {
+  setActiveCategory: (category: string | null) => void;
+}
+
+export const WagerTab: React.FC<Props> = ({ setActiveCategory }) => {
   const { user } = useContext(AuthContext);
   const [isRealMoney, setIsRealMoney] = useState<boolean>(true);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedTab, setSelectedTab] = useState<'create' | 'wagers'>('create');
   const [showRank, setShowRank] = useState<boolean>(false);
-  const fadeAnim = useState(new Animated.Value(0))[0]; // Animation for Rank popup
+  const fadeAnim = useState(new Animated.Value(0))[0];
 
   const rank = user?.rank ?? 'Bronze 3, Division 1';
   const [rankTitle, rankDivision] = rank.split(', ');
   const balance = user?.balance ?? '0.00';
-  const coinBalance = user?.coins ?? '0'; // Default to 0 coins
+  const coinBalance = user?.coins ?? '0';
 
   // Handle Rank Popup Animation
   const toggleRankPopup = () => {
@@ -39,38 +38,11 @@ export const WagerTab: React.FC = () => {
     }
   };
 
-  const renderCategory = () => {
-    switch (selectedCategory) {
-      case 'wagerx':
-        return <WagerXGames goBack={() => setSelectedCategory(null)} />;
-      case 'video':
-        return <VideoGames goBack={() => setSelectedCategory(null)} />;
-      case 'sports':
-        return <Sports goBack={() => setSelectedCategory(null)} />;
-      case 'custom':
-        return <CustomWager goBack={() => setSelectedCategory(null)} />;
-      default:
-        return (
-          <View className="mt-6 space-y-4">
-            {/* Top Row */}
-            <View className="flex-row justify-center space-x-4">
-              {renderCategoryButton('WagerX Games', 'gamepad', 'wagerx')}
-              {renderCategoryButton('Video Games', 'playstation', 'video')}
-            </View>
-            {/* Bottom Row */}
-            <View className="flex-row justify-center space-x-4">
-              {renderCategoryButton('Sports', 'football-ball', 'sports')}
-              {renderCategoryButton('Custom Wager', 'plus', 'custom')}
-            </View>
-          </View>
-        );
-    }
-  };
-
+  // Render category buttons
   const renderCategoryButton = (label: string, icon: string, category: string) => (
     <TouchableOpacity
       className="flex h-28 w-40 items-center justify-center rounded-xl bg-gray-800 shadow-lg transition-all hover:bg-gray-700"
-      onPress={() => setSelectedCategory(category)}>
+      onPress={() => setActiveCategory(category)}>
       <FontAwesome5 name={icon} size={26} color="white" />
       <Text className="mt-3 text-lg font-semibold text-white">{label}</Text>
     </TouchableOpacity>
@@ -80,7 +52,7 @@ export const WagerTab: React.FC = () => {
     <View className="flex-1 bg-gray-900 p-4">
       {/* Unified Header with Balance, Rank, and Switch */}
       <View className="flex-row items-center justify-between rounded-lg bg-gray-800 p-5 shadow-md">
-        {/* Balance Display - Shows Real Money or Coins */}
+        {/* Balance Display */}
         <View className="flex">
           <Text className="text-sm text-gray-400">
             {isRealMoney ? 'Your Balance' : 'Your Coins'}
@@ -91,7 +63,7 @@ export const WagerTab: React.FC = () => {
           </Text>
         </View>
 
-        {/* Rank Section (Tap to reveal text) */}
+        {/* Rank Section */}
         <TouchableOpacity
           onPress={toggleRankPopup}
           className="relative -ml-6 flex w-16 items-center justify-center">
@@ -107,16 +79,16 @@ export const WagerTab: React.FC = () => {
           )}
         </TouchableOpacity>
 
-        {/* Toggle Switch - Fully Yellow for Coins, Fully Green for Real Money */}
+        {/* Toggle Switch */}
         <Switch
           value={isRealMoney}
           onValueChange={setIsRealMoney}
           thumbColor={isRealMoney ? 'bg-green-950' : '#FFD700'}
-          trackColor={{ false: '#FFD700', true: '#32CD32' }} // Fully yellow for coins, fully green for real money
+          trackColor={{ false: '#FFD700', true: '#32CD32' }}
         />
       </View>
 
-      {/* Tab Selection (Create Wager or Your Wagers) */}
+      {/* Tab Selection */}
       <View className="mt-6 flex-row justify-around">
         <TouchableOpacity
           className={`rounded-lg px-6 py-3 ${
@@ -135,22 +107,18 @@ export const WagerTab: React.FC = () => {
         </TouchableOpacity>
       </View>
 
-      {/* Hide content when "Your Wagers" is selected */}
+      {/* Category Selection */}
       {selectedTab === 'create' && (
-        <>
-          {/* Back Button (Only if category selected) */}
-          {selectedCategory && (
-            <TouchableOpacity
-              onPress={() => setSelectedCategory(null)}
-              className="mt-6 flex flex-row items-center">
-              <FontAwesome5 name="arrow-left" size={20} color="white" />
-              <Text className="ml-3 text-lg font-semibold text-white">Back</Text>
-            </TouchableOpacity>
-          )}
-
-          {/* Content Rendering */}
-          <View className="mt-6 flex-1">{renderCategory()}</View>
-        </>
+        <View className="mt-6 space-y-4">
+          <View className="flex-row justify-center space-x-4">
+            {renderCategoryButton('WagerX Games', 'gamepad', 'wagerx')}
+            {renderCategoryButton('Video Games', 'playstation', 'video')}
+          </View>
+          <View className="flex-row justify-center space-x-4">
+            {renderCategoryButton('Sports', 'football-ball', 'sports')}
+            {renderCategoryButton('Custom Wager', 'plus', 'custom')}
+          </View>
+        </View>
       )}
     </View>
   );
